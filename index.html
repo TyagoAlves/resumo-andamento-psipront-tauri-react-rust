@@ -49,6 +49,7 @@
       <a href="#recursos">Recursos</a>
       <a href="#telas">Telas</a>
       <a href="#tecnologia">Tecnologia</a>
+      <a href="#investigacao">Investigação</a>
       <a href="#proximos">Próximos passos</a>
     </nav>
 
@@ -350,8 +351,66 @@
     </div>
   </section>
 
+  <!-- INVESTIGAÇÃO -->
+  <section class="secao secao-alt" id="investigacao">
+    <div class="limite">
+      <header class="secao-cabecalho revelar">
+        <span class="rotulo">Investigação</span>
+        <h2>A falha intermitente que apareceu na validação</h2>
+        <p>
+          Durante os testes, uma verificação passou a falhar de vez em quando: o painel
+          dizia que o profissional tinha <strong>0 pacientes</strong>, mesmo com o paciente
+          aparecendo na mesma tela. Investigamos até a causa — e ela não estava no sistema.
+        </p>
+      </header>
+
+      <div class="caso-grade">
+        <article class="caso revelar">
+          <span class="caso-numero">01</span>
+          <h3>O sintoma</h3>
+          <p>
+            Em 4 de cada 10 execuções o teste falhava com “esperava 1, recebeu 0”. Na
+            repetição seguinte, passava — o clássico problema que some quando alguém vai olhar.
+          </p>
+        </article>
+        <article class="caso revelar">
+          <span class="caso-numero">02</span>
+          <h3>A causa</h3>
+          <p>
+            O painel abre mostrando zero e só depois de buscar os dados troca pelo número real.
+            O teste lia o valor nesse intervalo. A prova veio da própria captura automática
+            feita no instante da falha: nela o painel já mostrava <strong>1</strong>.
+          </p>
+        </article>
+        <article class="caso revelar">
+          <span class="caso-numero">03</span>
+          <h3>A correção</h3>
+          <p>
+            O teste passou a esperar o painel montar antes de ler o número. Nenhum atalho:
+            não escondemos a mensagem de erro nem afrouxamos a verificação — a leitura é que
+            estava cedo demais.
+          </p>
+        </article>
+      </div>
+
+      <div class="resultado revelar">
+        <div class="resultado-numeros">
+          <div><strong>10/10</strong><span>execuções do teste corrigido, sem falha</span></div>
+          <div><strong>27/27</strong><span>execuções do arquivo de testes completo</span></div>
+          <div><strong>0</strong><span>erros de tipagem após a mudança</span></div>
+        </div>
+        <p class="resultado-texto">
+          O aplicativo não precisou ser alterado para o teste passar — o comportamento dele
+          estava correto. Só o teste estava impaciente.
+          <a href="https://github.com/TyagoAlves/resumo-andamento-psipront-tauri-react-rust/blob/main/Relat%C3%B3rio%20de%20continuidade.md">Ler o relatório de continuidade</a>
+          <small>(registro da investigação, escrito antes da correção)</small>
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- PRÓXIMOS PASSOS -->
-  <section class="secao secao-alt" id="proximos">
+  <section class="secao" id="proximos">
     <div class="limite">
       <header class="secao-cabecalho revelar">
         <span class="rotulo">Próximos passos</span>

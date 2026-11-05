@@ -6,6 +6,8 @@ para clínicas psicológicas), feita para publicar no GitHub Pages.
 - Sem framework, sem build: `index.html` + CSS + JS puros.
 - Nenhuma dependência externa (fontes do sistema, ícones em SVG, imagens locais).
 - 7 capturas reais do sistema em `assets/prints/` (dados fictícios de demonstração).
+- Inclui a seção **Investigação**, que resume a falha intermitente encontrada nos
+  testes e a correção; o registro completo está em `Relatório de continuidade.md`.
 
 ## Ver localmente
 
