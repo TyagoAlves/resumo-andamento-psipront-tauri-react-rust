@@ -89,6 +89,188 @@ svg {
   border-radius: 6px;
 }
 
+/* ---------- botões (complementos) ---------- */
+
+.icone-botao { width: 18px; height: 18px; stroke-width: 2; }
+
+.botao-grande { padding: 16px 28px; font-size: 16.5px; }
+.botao-grande .icone-botao { width: 20px; height: 20px; }
+
+.baixar-meta {
+  margin-top: 14px;
+  font-size: 13.5px;
+  color: var(--tinta-fraca);
+}
+.baixar-meta strong { color: var(--tinta-suave); }
+
+/* ---------- recursos em 3 colunas ---------- */
+
+@media (min-width: 1041px) {
+  .grade-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- passos de instalação ---------- */
+
+.passos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: passo;
+}
+
+.passos li {
+  padding: 28px 24px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-suave);
+}
+
+.passo-num {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--verde-claro);
+  color: var(--verde-escuro);
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.passos h3 { font-size: 17.5px; }
+.passos p { margin-top: 9px; font-size: 14.5px; color: var(--tinta-suave); }
+
+.link-baixar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--verde-escuro);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--verde-claro);
+  word-break: break-all;
+}
+.link-baixar svg { width: 15px; height: 15px; stroke-width: 2; }
+.link-baixar:hover { background: #d3e9e5; }
+
+.aviso {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  margin-top: 22px;
+  padding: 24px 26px;
+  border-radius: var(--raio);
+  background: #fdf6e7;
+  border: 1px solid #ecd9b0;
+}
+.aviso-icone {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #f6e6c4;
+  color: #8a5a10;
+}
+.aviso h3 { font-size: 16.5px; color: #6b4708; }
+.aviso p { margin-top: 8px; font-size: 14.5px; color: #6f5a33; }
+.aviso strong { color: #573c05; }
+
+.acesso-demo {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 18px 28px;
+  margin-top: 18px;
+  padding: 24px 26px;
+  border-radius: var(--raio);
+  border: 1px solid var(--borda);
+  background: var(--superficie);
+}
+.acesso-demo h3 { font-size: 16.5px; }
+.acesso-demo p { margin-top: 6px; font-size: 14.5px; color: var(--tinta-suave); }
+.acesso-demo dl { margin: 0; display: grid; gap: 8px; align-content: start; }
+.acesso-demo dl > div {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 14.5px;
+}
+.acesso-demo dt { color: var(--tinta-fraca); }
+.acesso-demo dd { margin: 0; }
+.acesso-demo code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 13.5px;
+  background: var(--fundo-alt);
+  padding: 3px 7px;
+  border-radius: 6px;
+  border: 1px solid var(--borda);
+}
+.acesso-aviso { grid-column: 1 / -1; font-size: 13px; color: var(--tinta-fraca); }
+
+.requisitos-linha {
+  margin-top: 22px;
+  font-size: 13.5px;
+  color: var(--tinta-fraca);
+  max-width: 78ch;
+}
+.requisitos-linha strong { color: var(--tinta-suave); }
+
+/* ---------- notas técnicas ---------- */
+
+.notas-capa { padding-block: 64px 20px; }
+.notas-capa h1 { font-size: clamp(1.9rem, 1.3rem + 2vw, 2.7rem); letter-spacing: -.03em; }
+.notas-capa p { margin-top: 14px; color: var(--tinta-suave); max-width: 62ch; }
+
+.notas .secao { padding-block: 56px; }
+.notas .secao-cabecalho { margin-bottom: 30px; }
+.notas .secao h2 { font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem); }
+
+.codigo-lista {
+  margin: 0;
+  padding: 20px 22px;
+  list-style: none;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  font-size: 14.5px;
+  color: var(--tinta-suave);
+  display: grid;
+  gap: 8px;
+}
+.codigo-lista code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 13px;
+  background: var(--fundo-alt);
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+.rodape-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  font-size: 13.5px;
+}
+.rodape-links a { color: var(--tinta-suave); text-decoration: none; }
+.rodape-links a:hover { color: var(--verde-escuro); text-decoration: underline; }
+
+/* ---------- responsivo (complementos) ---------- */
+
+@media (max-width: 1040px) {
+  .passos { grid-template-columns: 1fr; }
+  .acesso-demo { grid-template-columns: 1fr; }
+}
+
 /* ---------- topo ---------- */
 
 .topo {

@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notas técnicas e andamento — Clínica Psi</title>
+<meta name="description" content="Detalhes técnicos do Clínica Psi: stack, arquitetura, investigação da falha intermitente nos testes, qualidade e próximos passos." />
+<meta name="theme-color" content="#0f766e" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="assets/css/estilo.css" />
+<meta name="robots" content="noindex" />
+</head>
+<body>
+
+<a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+<svg class="simbolos" aria-hidden="true" focusable="false">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-codigo" viewBox="0 0 24 24"><path d="M9 8l-5 4 5 4M15 8l5 4-5 4"/></symbol>
+  <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.4 8.5-8 9.9C7.4 20.5 4 17 4 12V6Z"/></symbol>
+  <symbol id="i-backup" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/><path d="M12 8v4l3 2"/></symbol>
+  <symbol id="i-lgpd" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6Z"/><path d="M9 12l2 2 4-4"/></symbol>
+</svg>
+
+<header class="topo" id="topo">
+  <div class="limite topo-linha">
+    <a class="marca" href="index.html" aria-label="Clínica Psi, início">
+      <span class="marca-simbolo" aria-hidden="true">CP</span>
+      <span class="marca-texto">
+        <strong>Clínica Psi</strong>
+        <small>prontuário eletrônico</small>
+      </span>
+    </a>
+    <a class="botao botao-pequeno botao-vazio" href="index.html">
+      Voltar ao site
+    </a>
+  </div>
+</header>
+
+<main id="conteudo" class="notas">
+
+  <section class="limite notas-capa">
+    <span class="rotulo">Notas técnicas</span>
+    <h1>Andamento, arquitetura e qualidade</h1>
+    <p>
+      Esta página é o detalhamento técnico da versão de avaliação. O site principal, com o
+      download do aplicativo, está em <a href="index.html">clínica Psi</a>.
+    </p>
+    <p class="baixar-meta">Versão 1.0.0 · build de novembro de 2026 · Windows 10/11 (x64)</p>
+  </section>
+
+  <!-- ANDAMENTO -->
+  <section class="secao" id="andamento">
+    <div class="limite">
+      <header class="secao-cabecalho">
+        <h2>Onde o projeto está</h2>
+      </header>
+
+      <ol class="linha-tempo">
+        <li>
+          <span class="etapa-ano">Etapa 1</span>
+          <h3>POC em HTML, CSS e JavaScript</h3>
+          <p>Primeira versão usada no dia a dia para validar prontuário, agenda e termos.</p>
+          <span class="status status-feito"><svg><use href="#i-check"/></svg> concluído</span>
+        </li>
+        <li>
+          <span class="etapa-ano">Etapa 2</span>
+          <h3>Reescrita em React + TypeScript</h3>
+          <p>Mesma interface, agora com componentes, tipagem forte e serviços separados da tela.</p>
+          <span class="status status-feito"><svg><use href="#i-check"/></svg> concluído</span>
+        </li>
+        <li>
+          <span class="etapa-ano">Etapa 3</span>
+          <h3>Empacotamento desktop</h3>
+          <p>Tauri + Rust + SQLite: banco local, backup automático, log de erros e instalador.</p>
+          <span class="status status-feito"><svg><use href="#i-check"/></svg> concluído</span>
+        </li>
+        <li>
+          <span class="etapa-ano">Etapa 4</span>
+          <h3>Validação com a clínica</h3>
+          <p>Uso assistido com profissionais, ajuste de textos, atalhos e usabilidade.</p>
+          <span class="status status-atual"><span class="ponto"></span> em andamento</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ARQUITETURA -->
+  <section class="secao secao-alt" id="arquitetura">
+    <div class="limite">
+      <header class="secao-cabecalho">
+        <h2>Como o app foi construído</h2>
+        <p>
+          O mesmo código de interface roda no aplicativo e na versão web. A diferença fica
+          só na camada de armazenamento — o domínio não sabe onde os dados moram.
+        </p>
+      </header>
+
+      <div class="tecnologia-grade">
+        <div class="pilha">
+          <div class="camada camada-ui">
+            <span class="camada-nome">Interface</span>
+            <strong>React 19 · TypeScript · Vite · Tailwind</strong>
+            <small>telas, componentes e estado da sessão</small>
+          </div>
+          <span class="seta-baixo" aria-hidden="true">↓</span>
+          <div class="camada camada-meio">
+            <span class="camada-nome">Regras e dados</span>
+            <strong>Serviços · repositórios · StorageAdapter</strong>
+            <small>contrato único de chave-valor, independente do alvo</small>
+          </div>
+          <span class="seta-baixo" aria-hidden="true">↓</span>
+          <div class="camada-dupla">
+            <div class="camada camada-app">
+              <span class="camada-nome">App desktop</span>
+              <strong>SQLite via Rust</strong>
+              <small>%APPDATA%\br.com.clinicapsi.prontuario</small>
+            </div>
+            <div class="camada camada-web">
+              <span class="camada-nome">Versão web</span>
+              <strong>localStorage</strong>
+              <small>usada nos testes automatizados</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="detalhes-tecnicos">
+          <h3>Por que um app de desktop?</h3>
+          <ul class="lista-checks">
+            <li><svg><use href="#i-check"/></svg> <span><strong>Sem teto de 5 MB:</strong> o navegador limita o localStorage; o SQLite não.</span></li>
+            <li><svg><use href="#i-check"/></svg> <span><strong>Dados no computador da clínica:</strong> nada é enviado para servidores de terceiros.</span></li>
+            <li><svg><use href="#i-check"/></svg> <span><strong>Backup consistente:</strong> o Rust copia o banco com o aplicativo aberto.</span></li>
+            <li><svg><use href="#i-check"/></svg> <span><strong>Sem administrador:</strong> o instalador coloca o app só para o usuário.</span></li>
+          </ul>
+
+          <div class="requisitos">
+            <h4>Requisitos</h4>
+            <dl>
+              <div><dt>Sistema</dt><dd>Windows 10 (1803+) ou 11, 64 bits</dd></div>
+              <div><dt>Componente</dt><dd>WebView2 — já vem no Windows atualizado</dd></div>
+              <div><dt>Instalador</dt><dd>2,5 MB · instalação por usuário</dd></div>
+              <div><dt>Internet</dt><dd>só para instalar, se o WebView2 faltar</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTIGAÇÃO -->
+  <section class="secao" id="investigacao">
+    <div class="limite">
+      <header class="secao-cabecalho">
+        <h2>A falha intermitente que apareceu na validação</h2>
+        <p>
+          Durante os testes, uma verificação passou a falhar de vez em quando: o painel
+          dizia que o profissional tinha <strong>0 pacientes</strong>, mesmo com o paciente
+          aparecendo na mesma tela. Investigamos até a causa — e ela não estava no sistema.
+        </p>
+      </header>
+
+      <div class="caso-grade">
+        <article class="caso">
+          <span class="caso-numero">01</span>
+          <h3>O sintoma</h3>
+          <p>
+            Em 4 de cada 10 execuções o teste falhava com “esperava 1, recebeu 0”. Na
+            repetição seguinte, passava — o clássico problema que some quando alguém vai olhar.
+          </p>
+        </article>
+        <article class="caso">
+          <span class="caso-numero">02</span>
+          <h3>A causa</h3>
+          <p>
+            O painel abre mostrando zero e só depois de buscar os dados troca pelo número real.
+            O teste lia o valor nesse intervalo. A prova veio da própria captura automática
+            feita no instante da falha: nela o painel já mostrava <strong>1</strong>.
+          </p>
+        </article>
+        <article class="caso">
+          <span class="caso-numero">03</span>
+          <h3>A correção</h3>
+          <p>
+            O teste passou a esperar o painel montar antes de ler o número. Nenhum atalho:
+            não escondemos a mensagem de erro nem afrouxamos a verificação — a leitura é que
+            estava cedo demais.
+          </p>
+        </article>
+      </div>
+
+      <div class="resultado">
+        <div class="resultado-numeros">
+          <div><strong>10/10</strong><span>execuções do teste corrigido, sem falha</span></div>
+          <div><strong>27/27</strong><span>execuções do arquivo de testes completo</span></div>
+          <div><strong>0</strong><span>erros de tipagem após a mudança</span></div>
+        </div>
+        <p class="resultado-texto">
+          O aplicativo não precisou ser alterado para o teste passar — o comportamento dele
+          estava correto. Só o teste estava impaciente.
+          <a href="https://github.com/TyagoAlves/resumo-andamento-psipront-tauri-react-rust/blob/main/Relat%C3%B3rio%20de%20continuidade.md">Ler o relatório de continuidade</a>
+          <small>(registro da investigação, escrito antes da correção)</small>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUALIDADE -->
+  <section class="secao secao-alt" id="qualidade">
+    <div class="limite">
+      <header class="secao-cabecalho">
+        <h2>Cuidados que já estão no código</h2>
+      </header>
+
+      <div class="grade-qualidade">
+        <article class="qualidade">
+          <svg><use href="#i-codigo"/></svg>
+          <h3>Testes de ponta a ponta</h3>
+          <p>Suíte Playwright cobre login, permissões, visibilidade de pacientes, migração da versão antiga e logs.</p>
+        </article>
+        <article class="qualidade">
+          <svg><use href="#i-escudo"/></svg>
+          <h3>Permissões testadas</h3>
+          <p>Quem não administra não vê a clínica inteira, não abre ficha de outro profissional e não se atribui a paciente alheio.</p>
+        </article>
+        <article class="qualidade">
+          <svg><use href="#i-backup"/></svg>
+          <h3>Backup com verificação</h3>
+          <p>O banco passa por checagem de integridade na abertura; cópias antigas são retidas e podem ser restauradas.</p>
+        </article>
+        <article class="qualidade">
+          <svg><use href="#i-lgpd"/></svg>
+          <h3>LGPD no fluxo</h3>
+          <p>Termos com vigência, exportação por profissional e aviso no painel de quem está sem termo válido.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRÓXIMOS -->
+  <section class="secao" id="proximos">
+    <div class="limite">
+      <header class="secao-cabecalho">
+        <h2>Próximos passos</h2>
+        <p>Propostas para a próxima etapa — nada aqui está fechado sem a sua avaliação.</p>
+      </header>
+
+      <div class="proximos-grade">
+        <article class="proximo">
+          <span class="prazo">Curto prazo</span>
+          <h3>Validar com a clínica</h3>
+          <ul>
+            <li>Uso assistido com dois ou três profissionais</li>
+            <li>Ajuste de textos, atalhos e mensagens</li>
+            <li>Revisão do painel durante o carregamento</li>
+          </ul>
+        </article>
+        <article class="proximo">
+          <span class="prazo">Médio prazo</span>
+          <h3>Deixar a entrega mais robusta</h3>
+          <ul>
+            <li>Assinatura digital do instalador (evita o aviso do SmartScreen)</li>
+            <li>Teste de restauração em máquina limpa</li>
+            <li>Atualização do app sem reinstalar</li>
+          </ul>
+        </article>
+        <article class="proximo">
+          <span class="prazo">Em avaliação</span>
+          <h3>Evoluções possíveis</h3>
+          <ul>
+            <li>Relatórios personalizáveis por profissional</li>
+            <li>Modelos de termo por tipo de atendimento</li>
+            <li>Exportação completa para troca de computador</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="fechamento">
+    <div class="limite fechamento-caixa">
+      <div>
+        <h2>Pronto para testar</h2>
+        <p>O instalador está disponível na página inicial. Se algo não funcionar, me avise com o que apareceu na tela.</p>
+      </div>
+      <a class="botao botao-claro" href="index.html#instalar">
+        Ir para o download
+        <svg><use href="#i-seta"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="limite rodape-linha">
+    <div class="rodape-marca">
+      <span class="marca-simbolo" aria-hidden="true">CP</span>
+      <div>
+        <strong>Clínica Psi</strong>
+        <small>Prontuário eletrônico para clínicas psicológicas</small>
+      </div>
+    </div>
+    <nav class="rodape-links" aria-label="Links do rodapé">
+      <a href="index.html">Página inicial</a>
+      <a href="https://github.com/TyagoAlves/resumo-andamento-psipront-tauri-react-rust">Repositório</a>
+    </nav>
+    <p class="rodape-aviso">
+      Versão 1.0.0 · novembro de 2026<br />
+      Imagens com dados fictícios de demonstração.
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>

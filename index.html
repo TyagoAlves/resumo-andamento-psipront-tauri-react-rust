@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Clínica Psi — Prontuário eletrônico | Resumo de andamento</title>
-<meta name="description" content="Resumo de andamento do Clínica Psi: prontuário eletrônico para clínicas psicológicas, com agenda, evoluções, termos LGPD e relatórios. React + Tauri + Rust, dados em SQLite no computador da clínica." />
+<title>Clínica Psi — Baixe o prontuário eletrônico para Windows</title>
+<meta name="description" content="Baixe o Clínica Psi: prontuário eletrônico para clínicas psicológicas com agenda, evoluções, termos LGPD e relatórios. Instalador de 2,5 MB para Windows 10 e 11, funciona offline." />
 <meta name="theme-color" content="#0f766e" />
-<meta property="og:title" content="Clínica Psi — Prontuário eletrônico" />
-<meta property="og:description" content="Agenda, evoluções, LGPD e relatórios em um aplicativo de desktop. Dados guardados na clínica, sem depender de nuvem." />
+<meta property="og:title" content="Clínica Psi — Baixe o prontuário eletrônico" />
+<meta property="og:description" content="Agenda, evoluções, LGPD e relatórios em um aplicativo para Windows. Instala em um minuto e funciona sem internet." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="assets/prints/painel.jpg" />
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -22,16 +22,15 @@
   <symbol id="i-prontuario" viewBox="0 0 24 24"><path d="M5 4a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></symbol>
   <symbol id="i-lgpd" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6Z"/><path d="M9 12l2 2 4-4"/></symbol>
   <symbol id="i-relatorio" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="M8 16v-5M12 16V7M16 16v-8"/></symbol>
-  <symbol id="i-cadeado" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 15v2"/></symbol>
   <symbol id="i-permissoes" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 11a3 3 0 1 0 0-6M17 20c0-2.2-.9-4.2-2.3-5.6"/></symbol>
   <symbol id="i-backup" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/><path d="M12 8v4l3 2"/></symbol>
-  <symbol id="i-ajustes" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
-  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
   <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13" rx="2.5"/><path d="M8 21h8M12 17v4"/></symbol>
   <symbol id="i-nuvem-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M18.5 17.5H7a4 4 0 0 1-.6-7.95A6 6 0 0 1 17 8.3a4 4 0 0 1 1.5 7.7"/></symbol>
-  <symbol id="i-codigo" viewBox="0 0 24 24"><path d="M9 8l-5 4 5 4M15 8l5 4-5 4"/></symbol>
   <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.4 8.5-8 9.9C7.4 20.5 4 17 4 12V6Z"/></symbol>
+  <symbol id="i-codigo" viewBox="0 0 24 24"><path d="M9 8l-5 4 5 4M15 8l5 4-5 4"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
 </svg>
 
 <header class="topo" id="topo">
@@ -45,40 +44,48 @@
     </a>
 
     <nav class="menu" aria-label="Seções">
-      <a href="#andamento">Andamento</a>
       <a href="#recursos">Recursos</a>
       <a href="#telas">Telas</a>
-      <a href="#tecnologia">Tecnologia</a>
-      <a href="#investigacao">Investigação</a>
-      <a href="#proximos">Próximos passos</a>
+      <a href="#instalar">Como instalar</a>
+      <a href="notas.html">Notas técnicas</a>
     </nav>
 
-    <a class="botao botao-pequeno" href="#telas">Ver as telas</a>
+    <a class="botao botao-pequeno" href="download/clinica-psi_1.0.0_x64-setup.exe" download>
+      <svg class="icone-botao"><use href="#i-download"/></svg>
+      Baixar
+    </a>
   </div>
 </header>
 
 <main id="conteudo">
 
-  <!-- HERO -->
+  <!-- HERO / DOWNLOAD -->
   <section class="heroi">
     <div class="limite heroi-grade">
       <div class="heroi-texto revelar">
-        <span class="selo"><span class="ponto"></span> Resumo de andamento · versão 1.0.0</span>
-        <h1>O prontuário da clínica, agora em um aplicativo de desktop.</h1>
+        <span class="selo"><span class="ponto"></span> Versão de avaliação · 1.0.0 para Windows</span>
+        <h1>O prontuário da clínica, no computador da clínica.</h1>
         <p class="linha-fina">
-          Agenda, evoluções, termos de consentimento LGPD e relatórios em um só lugar —
-          com os dados guardados no computador da clínica, sem depender de internet.
+          Agenda, evoluções, termos LGPD e relatórios em um único aplicativo.
+          Instala em um minuto e funciona sem internet — os dados ficam só no seu computador.
         </p>
 
         <div class="heroi-acoes">
-          <a class="botao" href="#telas">Ver as telas do sistema</a>
-          <a class="botao botao-vazio" href="#andamento">Como está o andamento</a>
+          <a class="botao botao-grande" href="download/clinica-psi_1.0.0_x64-setup.exe" download>
+            <svg class="icone-botao"><use href="#i-download"/></svg>
+            Baixar para Windows
+          </a>
+          <a class="botao botao-vazio" href="#telas">Ver as telas</a>
         </div>
 
+        <p class="baixar-meta">
+          Instalador de <strong>2,5 MB</strong> · Windows 10 ou 11 · não pede senha de administrador
+        </p>
+
         <ul class="heroi-marcas" aria-label="Destaques">
-          <li><svg><use href="#i-monitor"/></svg> Windows 10 e 11</li>
           <li><svg><use href="#i-nuvem-off"/></svg> Funciona offline</li>
           <li><svg><use href="#i-escudo"/></svg> Dados na clínica</li>
+          <li><svg><use href="#i-monitor"/></svg> App para Windows</li>
         </ul>
       </div>
 
@@ -102,82 +109,40 @@
     </div>
   </section>
 
-  <!-- NÚMEROS -->
+  <!-- FAIXA DE CONFIANÇA -->
   <section class="faixa-numeros">
     <div class="limite numeros">
-      <div class="numero revelar"><strong>2,5 MB</strong><span>instalador NSIS</span></div>
-      <div class="numero revelar"><strong>7</strong><span>telas principais</span></div>
-      <div class="numero revelar"><strong>0</strong><span>servidores envolvidos</span></div>
-      <div class="numero revelar"><strong>1</strong><span>banco SQLite local</span></div>
-    </div>
-  </section>
-
-  <!-- ANDAMENTO -->
-  <section class="secao" id="andamento">
-    <div class="limite">
-      <header class="secao-cabecalho revelar">
-        <span class="rotulo">Andamento</span>
-        <h2>Onde o projeto está hoje</h2>
-        <p>
-          A versão web da POC foi reescrita em React + TypeScript e empacotada como
-          aplicativo desktop (Tauri + Rust) com banco SQLite. O instalador já é gerado
-          pelo próprio projeto.
-        </p>
-      </header>
-
-      <ol class="linha-tempo">
-        <li class="revelar">
-          <span class="etapa-ano">Etapa 1</span>
-          <h3>POC em HTML, CSS e JavaScript</h3>
-          <p>Primeira versão usada no dia a dia para validar o fluxo de prontuário, agenda e termos.</p>
-          <span class="status status-feito"><svg><use href="#i-check"/></svg> concluído</span>
-        </li>
-        <li class="revelar">
-          <span class="etapa-ano">Etapa 2</span>
-          <h3>Reescrita em React + TypeScript</h3>
-          <p>Mesma interface, agora com componentes, tipagem forte e camada de serviços separada da tela.</p>
-          <span class="status status-feito"><svg><use href="#i-check"/></svg> concluído</span>
-        </li>
-        <li class="revelar">
-          <span class="etapa-ano">Etapa 3</span>
-          <h3>Empacotamento desktop</h3>
-          <p>Tauri + Rust + SQLite: banco local, backup automático, log de erros e instalador para Windows.</p>
-          <span class="status status-feito"><svg><use href="#i-check"/></svg> concluído</span>
-        </li>
-        <li class="revelar">
-          <span class="etapa-ano">Etapa 4</span>
-          <h3>Validação com a clínica</h3>
-          <p>Uso assistido com profissionais reais, ajuste de textos, atalhos e detalhes de usabilidade.</p>
-          <span class="status status-atual"><span class="ponto"></span> em andamento</span>
-        </li>
-      </ol>
+      <div class="numero revelar"><strong>2,5 MB</strong><span>instalador único</span></div>
+      <div class="numero revelar"><strong>1 min</strong><span>para instalar</span></div>
+      <div class="numero revelar"><strong>Offline</strong><span>sem depender de internet</span></div>
+      <div class="numero revelar"><strong>0</strong><span>mensalidade de servidor</span></div>
     </div>
   </section>
 
   <!-- RECURSOS -->
-  <section class="secao secao-alt" id="recursos">
+  <section class="secao" id="recursos">
     <div class="limite">
       <header class="secao-cabecalho revelar">
         <span class="rotulo">Recursos</span>
-        <h2>O que já está funcionando</h2>
-        <p>Tudo abaixo foi implementado e faz parte da versão que está sendo avaliada.</p>
+        <h2>O que você usa no dia a dia</h2>
+        <p>Tudo já funciona nesta versão de avaliação.</p>
       </header>
 
-      <div class="grade-recursos">
+      <div class="grade-recursos grade-3">
         <article class="recurso revelar">
           <span class="recurso-icone"><svg><use href="#i-agenda"/></svg></span>
           <h3>Agenda do dia</h3>
-          <p>Sessões com horário, duração e profissional. Avisa conflitos, guarda notas e imprime a agenda em PDF.</p>
+          <p>Sessões com horário, duração e profissional. Avisa conflitos, guarda notas e imprime em PDF.</p>
         </article>
         <article class="recurso revelar">
           <span class="recurso-icone"><svg><use href="#i-prontuario"/></svg></span>
-          <h3>Prontuário por paciente</h3>
-          <p>Evoluções, dados de contato e histórico completo em uma ficha única, com acesso rápido pela agenda.</p>
+          <h3>Prontuário e evoluções</h3>
+          <p>Ficha completa do paciente, com histórico de evoluções e acesso rápido pela agenda.</p>
         </article>
         <article class="recurso revelar">
           <span class="recurso-icone"><svg><use href="#i-lgpd"/></svg></span>
           <h3>Termos LGPD</h3>
-          <p>Consentimento com vigência, modelo de termo editável e exportação dos dados de cada profissional.</p>
+          <p>Consentimento com vigência, modelo de termo editável e exportação dos dados por profissional.</p>
         </article>
         <article class="recurso revelar">
           <span class="recurso-icone"><svg><use href="#i-relatorio"/></svg></span>
@@ -185,41 +150,26 @@
           <p>Produção por período e termo assinado, prontos para imprimir ou salvar em PDF.</p>
         </article>
         <article class="recurso revelar">
-          <span class="recurso-icone"><svg><use href="#i-cadeado"/></svg></span>
-          <h3>Senha protegida</h3>
-          <p>A senha nunca é gravada em texto puro: o sistema guarda apenas o hash (PBKDF2, via WebCrypto).</p>
-        </article>
-        <article class="recurso revelar">
           <span class="recurso-icone"><svg><use href="#i-permissoes"/></svg></span>
-          <h3>Permissões por perfil</h3>
+          <h3>Acesso por perfil</h3>
           <p>Quem administra vê a clínica inteira. Cada profissional vê os próprios pacientes e os sem responsável.</p>
         </article>
         <article class="recurso revelar">
           <span class="recurso-icone"><svg><use href="#i-backup"/></svg></span>
           <h3>Backup e restauração</h3>
-          <p>Cópia automática do banco com retenção, além de exportar e restaurar backup manual — exigindo a senha atual.</p>
-        </article>
-        <article class="recurso revelar">
-          <span class="recurso-icone"><svg><use href="#i-ajustes"/></svg></span>
-          <h3>Configurações compartilháveis</h3>
-          <p>Exporta e importa identidade, marca, textos e modelos de termo — sem nenhum dado de paciente.</p>
+          <p>Cópia automática do banco com retenção, além de exportar e restaurar backup manual.</p>
         </article>
       </div>
-
-      <p class="nota revelar">
-        <strong>Quem já usava a versão antiga não perde nada:</strong> na primeira abertura, os dados da POC
-        (equipe, pacientes, serviços, agenda, evoluções e termos) são migrados automaticamente.
-      </p>
     </div>
   </section>
 
   <!-- TELAS -->
-  <section class="secao" id="telas">
+  <section class="secao secao-alt" id="telas">
     <div class="limite">
       <header class="secao-cabecalho revelar">
         <span class="rotulo">Telas</span>
-        <h2>Como o sistema se parece</h2>
-        <p>Capturas reais do sistema, feitas com os dados fictícios de demonstração.</p>
+        <h2>Veja antes de instalar</h2>
+        <p>Capturas reais do aplicativo, com os dados fictícios de demonstração.</p>
       </header>
 
       <div class="galeria revelar">
@@ -255,211 +205,76 @@
     </div>
   </section>
 
-  <!-- TECNOLOGIA -->
-  <section class="secao secao-alt" id="tecnologia">
+  <!-- INSTALAR -->
+  <section class="secao" id="instalar">
     <div class="limite">
       <header class="secao-cabecalho revelar">
-        <span class="rotulo">Tecnologia</span>
-        <h2>Como o app foi construído</h2>
-        <p>
-          O mesmo código de interface roda no aplicativo e na versão web. A diferença fica
-          só na camada de armazenamento — o domínio não sabe onde os dados moram.
-        </p>
+        <span class="rotulo">Como instalar</span>
+        <h2>Três passos e pronto</h2>
       </header>
 
-      <div class="tecnologia-grade">
-        <div class="pilha revelar">
-          <div class="camada camada-ui">
-            <span class="camada-nome">Interface</span>
-            <strong>React 19 · TypeScript · Vite · Tailwind</strong>
-            <small>telas, componentes e estado da sessão</small>
-          </div>
-          <span class="seta-baixo" aria-hidden="true">↓</span>
-          <div class="camada camada-meio">
-            <span class="camada-nome">Regras e dados</span>
-            <strong>Serviços · repositórios · StorageAdapter</strong>
-            <small>contrato único de chave-valor, independente do alvo</small>
-          </div>
-          <span class="seta-baixo" aria-hidden="true">↓</span>
-          <div class="camada-dupla">
-            <div class="camada camada-app">
-              <span class="camada-nome">App desktop</span>
-              <strong>SQLite via Rust</strong>
-              <small>%APPDATA%\br.com.clinicapsi.prontuario</small>
-            </div>
-            <div class="camada camada-web">
-              <span class="camada-nome">Versão web</span>
-              <strong>localStorage</strong>
-              <small>usada nos testes automatizados</small>
-            </div>
-          </div>
-        </div>
+      <ol class="passos">
+        <li class="revelar">
+          <span class="passo-num">1</span>
+          <h3>Baixe o instalador</h3>
+          <p>Arquivo de 2,5 MB. Se o navegador pedir confirmação, escolha “Manter”.</p>
+          <a class="link-baixar" href="download/clinica-psi_1.0.0_x64-setup.exe" download>
+            <svg><use href="#i-download"/></svg> clinica-psi_1.0.0_x64-setup.exe
+          </a>
+        </li>
+        <li class="revelar">
+          <span class="passo-num">2</span>
+          <h3>Abra e siga o assistente</h3>
+          <p>A instalação é só para o seu usuário do Windows — não pede senha de administrador.</p>
+        </li>
+        <li class="revelar">
+          <span class="passo-num">3</span>
+          <h3>Entre no sistema</h3>
+          <p>O app já vem com uma clínica de demonstração para você explorar sem cadastrar nada.</p>
+        </li>
+      </ol>
 
-        <div class="detalhes-tecnicos revelar">
-          <h3>Por que um app de desktop?</h3>
-          <ul class="lista-checks">
-            <li><svg><use href="#i-check"/></svg> <span><strong>Sem teto de 5 MB:</strong> o navegador limita o localStorage; o SQLite não.</span></li>
-            <li><svg><use href="#i-check"/></svg> <span><strong>Dados no computador da clínica:</strong> nada é enviado para servidores de terceiros.</span></li>
-            <li><svg><use href="#i-check"/></svg> <span><strong>Backup consistente:</strong> o Rust faz a cópia do banco com o aplicativo aberto.</span></li>
-            <li><svg><use href="#i-check"/></svg> <span><strong>Instalação sem administrador:</strong> o instalador coloca o app só para o usuário.</span></li>
-          </ul>
-
-          <div class="requisitos">
-            <h4>Para rodar</h4>
-            <dl>
-              <div><dt>Sistema</dt><dd>Windows 10 (1803+) ou 11, 64 bits</dd></div>
-              <div><dt>Componente</dt><dd>WebView2 — já vem no Windows atualizado</dd></div>
-              <div><dt>Instalador</dt><dd>2,5 MB · instalação por usuário</dd></div>
-              <div><dt>Internet</dt><dd>só para instalar, se o WebView2 faltar</dd></div>
-            </dl>
-          </div>
+      <div class="aviso revelar">
+        <span class="aviso-icone"><svg><use href="#i-escudo"/></svg></span>
+        <div>
+          <h3>“O Windows protegeu o seu PC”?</h3>
+          <p>
+            É esperado nesta versão de teste: o instalador ainda não tem assinatura digital.
+            Clique em <strong>Mais informações</strong> e depois em <strong>Executar assim mesmo</strong>.
+            O arquivo é o mesmo publicado no repositório do projeto — o código-fonte está aberto para conferência.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- QUALIDADE -->
-  <section class="secao" id="qualidade">
-    <div class="limite">
-      <header class="secao-cabecalho revelar">
-        <span class="rotulo">Qualidade</span>
-        <h2>Cuidados que já estão no código</h2>
-      </header>
-
-      <div class="grade-qualidade">
-        <article class="qualidade revelar">
-          <svg><use href="#i-codigo"/></svg>
-          <h3>Testes de ponta a ponta</h3>
-          <p>Suíte Playwright cobre login, permissões, visibilidade de pacientes, migração da versão antiga e logs.</p>
-        </article>
-        <article class="qualidade revelar">
-          <svg><use href="#i-escudo"/></svg>
-          <h3>Permissões testadas</h3>
-          <p>Quem não administra não vê a clínica inteira, não abre ficha de outro profissional e não se atribui a um paciente alheio.</p>
-        </article>
-        <article class="qualidade revelar">
-          <svg><use href="#i-backup"/></svg>
-          <h3>Backup com verificação</h3>
-          <p>O banco passa por checagem de integridade na abertura; cópias antigas são retidas e podem ser restauradas.</p>
-        </article>
-        <article class="qualidade revelar">
-          <svg><use href="#i-ajustes"/></svg>
-          <h3>Log de erros em arquivo</h3>
-          <p>Falhas inesperadas ficam registradas para diagnóstico, sem interromper o atendimento.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- INVESTIGAÇÃO -->
-  <section class="secao secao-alt" id="investigacao">
-    <div class="limite">
-      <header class="secao-cabecalho revelar">
-        <span class="rotulo">Investigação</span>
-        <h2>A falha intermitente que apareceu na validação</h2>
-        <p>
-          Durante os testes, uma verificação passou a falhar de vez em quando: o painel
-          dizia que o profissional tinha <strong>0 pacientes</strong>, mesmo com o paciente
-          aparecendo na mesma tela. Investigamos até a causa — e ela não estava no sistema.
-        </p>
-      </header>
-
-      <div class="caso-grade">
-        <article class="caso revelar">
-          <span class="caso-numero">01</span>
-          <h3>O sintoma</h3>
-          <p>
-            Em 4 de cada 10 execuções o teste falhava com “esperava 1, recebeu 0”. Na
-            repetição seguinte, passava — o clássico problema que some quando alguém vai olhar.
-          </p>
-        </article>
-        <article class="caso revelar">
-          <span class="caso-numero">02</span>
-          <h3>A causa</h3>
-          <p>
-            O painel abre mostrando zero e só depois de buscar os dados troca pelo número real.
-            O teste lia o valor nesse intervalo. A prova veio da própria captura automática
-            feita no instante da falha: nela o painel já mostrava <strong>1</strong>.
-          </p>
-        </article>
-        <article class="caso revelar">
-          <span class="caso-numero">03</span>
-          <h3>A correção</h3>
-          <p>
-            O teste passou a esperar o painel montar antes de ler o número. Nenhum atalho:
-            não escondemos a mensagem de erro nem afrouxamos a verificação — a leitura é que
-            estava cedo demais.
-          </p>
-        </article>
-      </div>
-
-      <div class="resultado revelar">
-        <div class="resultado-numeros">
-          <div><strong>10/10</strong><span>execuções do teste corrigido, sem falha</span></div>
-          <div><strong>27/27</strong><span>execuções do arquivo de testes completo</span></div>
-          <div><strong>0</strong><span>erros de tipagem após a mudança</span></div>
+      <div class="acesso-demo revelar">
+        <div>
+          <h3>Primeiro acesso</h3>
+          <p>Use a conta de demonstração para conhecer o sistema:</p>
         </div>
-        <p class="resultado-texto">
-          O aplicativo não precisou ser alterado para o teste passar — o comportamento dele
-          estava correto. Só o teste estava impaciente.
-          <a href="https://github.com/TyagoAlves/resumo-andamento-psipront-tauri-react-rust/blob/main/Relat%C3%B3rio%20de%20continuidade.md">Ler o relatório de continuidade</a>
-          <small>(registro da investigação, escrito antes da correção)</small>
-        </p>
+        <dl>
+          <div><dt>E-mail</dt><dd><code>ana@clinica.com.br</code></dd></div>
+          <div><dt>Senha</dt><dd><code>123456</code></dd></div>
+        </dl>
+        <p class="acesso-aviso">Depois, troque a senha em <strong>Configurações → Meu acesso</strong> e comece a cadastrar a sua clínica.</p>
       </div>
+
+      <p class="requisitos-linha revelar">
+        <strong>Requisitos:</strong> Windows 10 (1803 ou mais novo) ou Windows 11, 64 bits.
+        O WebView2 já vem no Windows atualizado — se faltar, o próprio instalador baixa da Microsoft.
+      </p>
     </div>
   </section>
 
-  <!-- PRÓXIMOS PASSOS -->
-  <section class="secao" id="proximos">
-    <div class="limite">
-      <header class="secao-cabecalho revelar">
-        <span class="rotulo">Próximos passos</span>
-        <h2>O que vem depois da validação</h2>
-        <p>Propostas para a próxima etapa — nada aqui está fechado sem a sua avaliação.</p>
-      </header>
-
-      <div class="proximos-grade">
-        <article class="proximo revelar">
-          <span class="prazo">Curto prazo</span>
-          <h3>Validar com a clínica</h3>
-          <ul>
-            <li>Uso assistido com dois ou três profissionais</li>
-            <li>Ajuste de textos, atalhos e mensagens</li>
-            <li>Revisão do painel durante o carregamento</li>
-          </ul>
-        </article>
-        <article class="proximo revelar">
-          <span class="prazo">Médio prazo</span>
-          <h3>Deixar a entrega mais robusta</h3>
-          <ul>
-            <li>Assinatura digital do instalador (evita o aviso do SmartScreen)</li>
-            <li>Teste de restauração em máquina limpa</li>
-            <li>Atualização do app sem reinstalar</li>
-          </ul>
-        </article>
-        <article class="proximo revelar">
-          <span class="prazo">Em avaliação</span>
-          <h3>Evoluções possíveis</h3>
-          <ul>
-            <li>Relatórios personalizáveis por profissional</li>
-            <li>Modelos de termo por tipo de atendimento</li>
-            <li>Exportação completa para troca de computador</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- FECHAMENTO -->
+  <!-- CTA FINAL -->
   <section class="fechamento">
     <div class="limite fechamento-caixa revelar">
       <div>
-        <h2>Pronto para o próximo teste</h2>
-        <p>O instalador está gerado e o app abre no Windows 10/11. O próximo passo é usar com dados reais, com acompanhamento.</p>
+        <h2>Teste na sua clínica hoje</h2>
+        <p>Sem cadastro, sem mensalidade e sem enviar dados para nenhum servidor. Se não gostar, desinstalar leva um clique.</p>
       </div>
-      <a class="botao botao-claro" href="https://github.com/TyagoAlves/resumo-andamento-psipront-tauri-react-rust">
-        Ver o repositório
-        <svg><use href="#i-seta"/></svg>
+      <a class="botao botao-claro" href="download/clinica-psi_1.0.0_x64-setup.exe" download>
+        <svg class="icone-botao"><use href="#i-download"/></svg>
+        Baixar para Windows
       </a>
     </div>
   </section>
@@ -475,9 +290,13 @@
         <small>Prontuário eletrônico para clínicas psicológicas</small>
       </div>
     </div>
+    <nav class="rodape-links" aria-label="Links do rodapé">
+      <a href="notas.html">Notas técnicas e andamento</a>
+      <a href="https://github.com/TyagoAlves/resumo-andamento-psipront-tauri-react-rust">Repositório</a>
+    </nav>
     <p class="rodape-aviso">
-      Versão 1.0.0 · build de novembro de 2026.<br />
-      As imagens usam dados fictícios de demonstração.
+      Versão 1.0.0 · novembro de 2026<br />
+      Imagens com dados fictícios de demonstração.
     </p>
   </div>
 </footer>
