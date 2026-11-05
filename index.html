@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clínica Psi — Prontuário eletrônico | Resumo de andamento</title>
+<meta name="description" content="Resumo de andamento do Clínica Psi: prontuário eletrônico para clínicas psicológicas, com agenda, evoluções, termos LGPD e relatórios. React + Tauri + Rust, dados em SQLite no computador da clínica." />
+<meta name="theme-color" content="#0f766e" />
+<meta property="og:title" content="Clínica Psi — Prontuário eletrônico" />
+<meta property="og:description" content="Agenda, evoluções, LGPD e relatórios em um aplicativo de desktop. Dados guardados na clínica, sem depender de nuvem." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/prints/painel.jpg" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="assets/css/estilo.css" />
+</head>
+<body>
+
+<a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+<svg class="simbolos" aria-hidden="true" focusable="false">
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M8 15h3"/></symbol>
+  <symbol id="i-prontuario" viewBox="0 0 24 24"><path d="M5 4a2 2 0 0 1 2-2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-lgpd" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6Z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-relatorio" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="M8 16v-5M12 16V7M16 16v-8"/></symbol>
+  <symbol id="i-cadeado" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 15v2"/></symbol>
+  <symbol id="i-permissoes" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 11a3 3 0 1 0 0-6M17 20c0-2.2-.9-4.2-2.3-5.6"/></symbol>
+  <symbol id="i-backup" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/><path d="M12 8v4l3 2"/></symbol>
+  <symbol id="i-ajustes" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13" rx="2.5"/><path d="M8 21h8M12 17v4"/></symbol>
+  <symbol id="i-nuvem-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M18.5 17.5H7a4 4 0 0 1-.6-7.95A6 6 0 0 1 17 8.3a4 4 0 0 1 1.5 7.7"/></symbol>
+  <symbol id="i-codigo" viewBox="0 0 24 24"><path d="M9 8l-5 4 5 4M15 8l5 4-5 4"/></symbol>
+  <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.4 8.5-8 9.9C7.4 20.5 4 17 4 12V6Z"/></symbol>
+</svg>
+
+<header class="topo" id="topo">
+  <div class="limite topo-linha">
+    <a class="marca" href="#topo" aria-label="Clínica Psi, início">
+      <span class="marca-simbolo" aria-hidden="true">CP</span>
+      <span class="marca-texto">
+        <strong>Clínica Psi</strong>
+        <small>prontuário eletrônico</small>
+      </span>
+    </a>
+
+    <nav class="menu" aria-label="Seções">
+      <a href="#andamento">Andamento</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#telas">Telas</a>
+      <a href="#tecnologia">Tecnologia</a>
+      <a href="#proximos">Próximos passos</a>
+    </nav>
+
+    <a class="botao botao-pequeno" href="#telas">Ver as telas</a>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="heroi">
+    <div class="limite heroi-grade">
+      <div class="heroi-texto revelar">
+        <span class="selo"><span class="ponto"></span> Resumo de andamento · versão 1.0.0</span>
+        <h1>O prontuário da clínica, agora em um aplicativo de desktop.</h1>
+        <p class="linha-fina">
+          Agenda, evoluções, termos de consentimento LGPD e relatórios em um só lugar —
+          com os dados guardados no computador da clínica, sem depender de internet.
+        </p>
+
+        <div class="heroi-acoes">
+          <a class="botao" href="#telas">Ver as telas do sistema</a>
+          <a class="botao botao-vazio" href="#andamento">Como está o andamento</a>
+        </div>
+
+        <ul class="heroi-marcas" aria-label="Destaques">
+          <li><svg><use href="#i-monitor"/></svg> Windows 10 e 11</li>
+          <li><svg><use href="#i-nuvem-off"/></svg> Funciona offline</li>
+          <li><svg><use href="#i-escudo"/></svg> Dados na clínica</li>
+        </ul>
+      </div>
+
+      <div class="heroi-visual revelar" aria-hidden="true">
+        <div class="janela">
+          <div class="janela-barra">
+            <span class="janela-ponto"></span><span class="janela-ponto"></span><span class="janela-ponto"></span>
+            <span class="janela-titulo">Clínica Psi · Painel</span>
+          </div>
+          <img src="assets/prints/painel.jpg" alt="" width="1440" height="900" fetchpriority="high" />
+        </div>
+        <div class="flutuante flutuante-1">
+          <span class="flutuante-icone"><svg><use href="#i-check"/></svg></span>
+          <div><strong>Backup automático</strong><small>cópia diária do banco</small></div>
+        </div>
+        <div class="flutuante flutuante-2">
+          <span class="flutuante-icone"><svg><use href="#i-lgpd"/></svg></span>
+          <div><strong>LGPD</strong><small>termos e exportação</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NÚMEROS -->
+  <section class="faixa-numeros">
+    <div class="limite numeros">
+      <div class="numero revelar"><strong>2,5 MB</strong><span>instalador NSIS</span></div>
+      <div class="numero revelar"><strong>7</strong><span>telas principais</span></div>
+      <div class="numero revelar"><strong>0</strong><span>servidores envolvidos</span></div>
+      <div class="numero revelar"><strong>1</strong><span>banco SQLite local</span></div>
+    </div>
+  </section>
+
+  <!-- ANDAMENTO -->
+  <section class="secao" id="andamento">
+    <div class="limite">
+      <header class="secao-cabecalho revelar">
+        <span class="rotulo">Andamento</span>
+        <h2>Onde o projeto está hoje</h2>
+        <p>
+          A versão web da POC foi reescrita em React + TypeScript e empacotada como
+          aplicativo desktop (Tauri + Rust) com banco SQLite. O instalador já é gerado
+          pelo próprio projeto.
+        </p>
+      </header>
+
+      <ol class="linha-tempo">
+        <li class="revelar">
+          <span class="etapa-ano">Etapa 1</span>
+          <h3>POC em HTML, CSS e JavaScript</h3>
+          <p>Primeira versão usada no dia a dia para validar o fluxo de prontuário, agenda e termos.</p>
+          <span class="status status-feito"><svg><use href="#i-check"/></svg> concluído</span>
+        </li>
+        <li class="revelar">
+          <span class="etapa-ano">Etapa 2</span>
+          <h3>Reescrita em React + TypeScript</h3>
+          <p>Mesma interface, agora com componentes, tipagem forte e camada de serviços separada da tela.</p>
+          <span class="status status-feito"><svg><use href="#i-check"/></svg> concluído</span>
+        </li>
+        <li class="revelar">
+          <span class="etapa-ano">Etapa 3</span>
+          <h3>Empacotamento desktop</h3>
+          <p>Tauri + Rust + SQLite: banco local, backup automático, log de erros e instalador para Windows.</p>
+          <span class="status status-feito"><svg><use href="#i-check"/></svg> concluído</span>
+        </li>
+        <li class="revelar">
+          <span class="etapa-ano">Etapa 4</span>
+          <h3>Validação com a clínica</h3>
+          <p>Uso assistido com profissionais reais, ajuste de textos, atalhos e detalhes de usabilidade.</p>
+          <span class="status status-atual"><span class="ponto"></span> em andamento</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- RECURSOS -->
+  <section class="secao secao-alt" id="recursos">
+    <div class="limite">
+      <header class="secao-cabecalho revelar">
+        <span class="rotulo">Recursos</span>
+        <h2>O que já está funcionando</h2>
+        <p>Tudo abaixo foi implementado e faz parte da versão que está sendo avaliada.</p>
+      </header>
+
+      <div class="grade-recursos">
+        <article class="recurso revelar">
+          <span class="recurso-icone"><svg><use href="#i-agenda"/></svg></span>
+          <h3>Agenda do dia</h3>
+          <p>Sessões com horário, duração e profissional. Avisa conflitos, guarda notas e imprime a agenda em PDF.</p>
+        </article>
+        <article class="recurso revelar">
+          <span class="recurso-icone"><svg><use href="#i-prontuario"/></svg></span>
+          <h3>Prontuário por paciente</h3>
+          <p>Evoluções, dados de contato e histórico completo em uma ficha única, com acesso rápido pela agenda.</p>
+        </article>
+        <article class="recurso revelar">
+          <span class="recurso-icone"><svg><use href="#i-lgpd"/></svg></span>
+          <h3>Termos LGPD</h3>
+          <p>Consentimento com vigência, modelo de termo editável e exportação dos dados de cada profissional.</p>
+        </article>
+        <article class="recurso revelar">
+          <span class="recurso-icone"><svg><use href="#i-relatorio"/></svg></span>
+          <h3>Relatórios</h3>
+          <p>Produção por período e termo assinado, prontos para imprimir ou salvar em PDF.</p>
+        </article>
+        <article class="recurso revelar">
+          <span class="recurso-icone"><svg><use href="#i-cadeado"/></svg></span>
+          <h3>Senha protegida</h3>
+          <p>A senha nunca é gravada em texto puro: o sistema guarda apenas o hash (PBKDF2, via WebCrypto).</p>
+        </article>
+        <article class="recurso revelar">
+          <span class="recurso-icone"><svg><use href="#i-permissoes"/></svg></span>
+          <h3>Permissões por perfil</h3>
+          <p>Quem administra vê a clínica inteira. Cada profissional vê os próprios pacientes e os sem responsável.</p>
+        </article>
+        <article class="recurso revelar">
+          <span class="recurso-icone"><svg><use href="#i-backup"/></svg></span>
+          <h3>Backup e restauração</h3>
+          <p>Cópia automática do banco com retenção, além de exportar e restaurar backup manual — exigindo a senha atual.</p>
+        </article>
+        <article class="recurso revelar">
+          <span class="recurso-icone"><svg><use href="#i-ajustes"/></svg></span>
+          <h3>Configurações compartilháveis</h3>
+          <p>Exporta e importa identidade, marca, textos e modelos de termo — sem nenhum dado de paciente.</p>
+        </article>
+      </div>
+
+      <p class="nota revelar">
+        <strong>Quem já usava a versão antiga não perde nada:</strong> na primeira abertura, os dados da POC
+        (equipe, pacientes, serviços, agenda, evoluções e termos) são migrados automaticamente.
+      </p>
+    </div>
+  </section>
+
+  <!-- TELAS -->
+  <section class="secao" id="telas">
+    <div class="limite">
+      <header class="secao-cabecalho revelar">
+        <span class="rotulo">Telas</span>
+        <h2>Como o sistema se parece</h2>
+        <p>Capturas reais do sistema, feitas com os dados fictícios de demonstração.</p>
+      </header>
+
+      <div class="galeria revelar">
+        <figure class="galeria-principal">
+          <img id="galeria-imagem" src="assets/prints/painel.jpg" alt="Painel com o total de pacientes, evoluções, sessões do dia e avisos de LGPD" width="1440" height="900" />
+          <figcaption id="galeria-legenda">Painel — visão geral da clínica</figcaption>
+        </figure>
+
+        <div class="galeria-miniaturas" role="tablist" aria-label="Telas do sistema">
+          <button type="button" role="tab" aria-selected="true" class="miniatura ativa" data-print="painel" data-legenda="Painel — visão geral da clínica">
+            <img src="assets/prints/painel.jpg" alt="" loading="lazy" /><span>Painel</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="miniatura" data-print="pacientes" data-legenda="Pacientes — carteira com status e responsável">
+            <img src="assets/prints/pacientes.jpg" alt="" loading="lazy" /><span>Pacientes</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="miniatura" data-print="prontuario" data-legenda="Prontuário — ficha do paciente com evoluções e termos">
+            <img src="assets/prints/prontuario.jpg" alt="" loading="lazy" /><span>Prontuário</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="miniatura" data-print="agenda" data-legenda="Agenda — sessões do dia, conflitos e impressão">
+            <img src="assets/prints/agenda.jpg" alt="" loading="lazy" /><span>Agenda</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="miniatura" data-print="lgpd" data-legenda="LGPD — termos de consentimento e vigência">
+            <img src="assets/prints/lgpd.jpg" alt="" loading="lazy" /><span>LGPD</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="miniatura" data-print="relatorios" data-legenda="Relatórios — produção do período e termo assinado">
+            <img src="assets/prints/relatorios.jpg" alt="" loading="lazy" /><span>Relatórios</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="miniatura" data-print="configuracoes" data-legenda="Configurações — identidade da clínica, equipe e dados">
+            <img src="assets/prints/configuracoes.jpg" alt="" loading="lazy" /><span>Configurações</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECNOLOGIA -->
+  <section class="secao secao-alt" id="tecnologia">
+    <div class="limite">
+      <header class="secao-cabecalho revelar">
+        <span class="rotulo">Tecnologia</span>
+        <h2>Como o app foi construído</h2>
+        <p>
+          O mesmo código de interface roda no aplicativo e na versão web. A diferença fica
+          só na camada de armazenamento — o domínio não sabe onde os dados moram.
+        </p>
+      </header>
+
+      <div class="tecnologia-grade">
+        <div class="pilha revelar">
+          <div class="camada camada-ui">
+            <span class="camada-nome">Interface</span>
+            <strong>React 19 · TypeScript · Vite · Tailwind</strong>
+            <small>telas, componentes e estado da sessão</small>
+          </div>
+          <span class="seta-baixo" aria-hidden="true">↓</span>
+          <div class="camada camada-meio">
+            <span class="camada-nome">Regras e dados</span>
+            <strong>Serviços · repositórios · StorageAdapter</strong>
+            <small>contrato único de chave-valor, independente do alvo</small>
+          </div>
+          <span class="seta-baixo" aria-hidden="true">↓</span>
+          <div class="camada-dupla">
+            <div class="camada camada-app">
+              <span class="camada-nome">App desktop</span>
+              <strong>SQLite via Rust</strong>
+              <small>%APPDATA%\br.com.clinicapsi.prontuario</small>
+            </div>
+            <div class="camada camada-web">
+              <span class="camada-nome">Versão web</span>
+              <strong>localStorage</strong>
+              <small>usada nos testes automatizados</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="detalhes-tecnicos revelar">
+          <h3>Por que um app de desktop?</h3>
+          <ul class="lista-checks">
+            <li><svg><use href="#i-check"/></svg> <span><strong>Sem teto de 5 MB:</strong> o navegador limita o localStorage; o SQLite não.</span></li>
+            <li><svg><use href="#i-check"/></svg> <span><strong>Dados no computador da clínica:</strong> nada é enviado para servidores de terceiros.</span></li>
+            <li><svg><use href="#i-check"/></svg> <span><strong>Backup consistente:</strong> o Rust faz a cópia do banco com o aplicativo aberto.</span></li>
+            <li><svg><use href="#i-check"/></svg> <span><strong>Instalação sem administrador:</strong> o instalador coloca o app só para o usuário.</span></li>
+          </ul>
+
+          <div class="requisitos">
+            <h4>Para rodar</h4>
+            <dl>
+              <div><dt>Sistema</dt><dd>Windows 10 (1803+) ou 11, 64 bits</dd></div>
+              <div><dt>Componente</dt><dd>WebView2 — já vem no Windows atualizado</dd></div>
+              <div><dt>Instalador</dt><dd>2,5 MB · instalação por usuário</dd></div>
+              <div><dt>Internet</dt><dd>só para instalar, se o WebView2 faltar</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUALIDADE -->
+  <section class="secao" id="qualidade">
+    <div class="limite">
+      <header class="secao-cabecalho revelar">
+        <span class="rotulo">Qualidade</span>
+        <h2>Cuidados que já estão no código</h2>
+      </header>
+
+      <div class="grade-qualidade">
+        <article class="qualidade revelar">
+          <svg><use href="#i-codigo"/></svg>
+          <h3>Testes de ponta a ponta</h3>
+          <p>Suíte Playwright cobre login, permissões, visibilidade de pacientes, migração da versão antiga e logs.</p>
+        </article>
+        <article class="qualidade revelar">
+          <svg><use href="#i-escudo"/></svg>
+          <h3>Permissões testadas</h3>
+          <p>Quem não administra não vê a clínica inteira, não abre ficha de outro profissional e não se atribui a um paciente alheio.</p>
+        </article>
+        <article class="qualidade revelar">
+          <svg><use href="#i-backup"/></svg>
+          <h3>Backup com verificação</h3>
+          <p>O banco passa por checagem de integridade na abertura; cópias antigas são retidas e podem ser restauradas.</p>
+        </article>
+        <article class="qualidade revelar">
+          <svg><use href="#i-ajustes"/></svg>
+          <h3>Log de erros em arquivo</h3>
+          <p>Falhas inesperadas ficam registradas para diagnóstico, sem interromper o atendimento.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <section class="secao secao-alt" id="proximos">
+    <div class="limite">
+      <header class="secao-cabecalho revelar">
+        <span class="rotulo">Próximos passos</span>
+        <h2>O que vem depois da validação</h2>
+        <p>Propostas para a próxima etapa — nada aqui está fechado sem a sua avaliação.</p>
+      </header>
+
+      <div class="proximos-grade">
+        <article class="proximo revelar">
+          <span class="prazo">Curto prazo</span>
+          <h3>Validar com a clínica</h3>
+          <ul>
+            <li>Uso assistido com dois ou três profissionais</li>
+            <li>Ajuste de textos, atalhos e mensagens</li>
+            <li>Revisão do painel durante o carregamento</li>
+          </ul>
+        </article>
+        <article class="proximo revelar">
+          <span class="prazo">Médio prazo</span>
+          <h3>Deixar a entrega mais robusta</h3>
+          <ul>
+            <li>Assinatura digital do instalador (evita o aviso do SmartScreen)</li>
+            <li>Teste de restauração em máquina limpa</li>
+            <li>Atualização do app sem reinstalar</li>
+          </ul>
+        </article>
+        <article class="proximo revelar">
+          <span class="prazo">Em avaliação</span>
+          <h3>Evoluções possíveis</h3>
+          <ul>
+            <li>Relatórios personalizáveis por profissional</li>
+            <li>Modelos de termo por tipo de atendimento</li>
+            <li>Exportação completa para troca de computador</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FECHAMENTO -->
+  <section class="fechamento">
+    <div class="limite fechamento-caixa revelar">
+      <div>
+        <h2>Pronto para o próximo teste</h2>
+        <p>O instalador está gerado e o app abre no Windows 10/11. O próximo passo é usar com dados reais, com acompanhamento.</p>
+      </div>
+      <a class="botao botao-claro" href="https://github.com/TyagoAlves/resumo-andamento-psipront-tauri-react-rust">
+        Ver o repositório
+        <svg><use href="#i-seta"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="limite rodape-linha">
+    <div class="rodape-marca">
+      <span class="marca-simbolo" aria-hidden="true">CP</span>
+      <div>
+        <strong>Clínica Psi</strong>
+        <small>Prontuário eletrônico para clínicas psicológicas</small>
+      </div>
+    </div>
+    <p class="rodape-aviso">
+      Versão 1.0.0 · build de novembro de 2026.<br />
+      As imagens usam dados fictícios de demonstração.
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
